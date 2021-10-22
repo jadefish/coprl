@@ -40,6 +40,20 @@ module Coprl
             instance_eval(&@block) if @block
           end
 
+          def source_location
+            return unless @block
+
+            @block.source_location.join(':').sub("#{Dir.pwd}/", '')
+          end
+
+          def source
+            return unless @block
+
+            s = @block.source
+            indent = s.scan(/^[ \t]*(?=\S)/).min.try(:size) || 0
+            s.gsub(/^[ \t]{#{indent}}/, '  ')
+          end
+
           private
 
           def initialize_plugins

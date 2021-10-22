@@ -1,3 +1,8 @@
-<% components.each_with_index do |comp, index| %>
-  <%= render_component(scope, comp, components, index) if comp %>
-<% end %>
+<% components.each_with_index do |comp, index| -%>
+  <%# show source if applicable. ugly, but makes for more readable output. -%>
+  <% if comp && ENV['COPRL_SHOW_SOURCE'] -%><!-- <%= comp.source_location -%> -->
+<!--
+<%= comp.source -%>
+--><% end -%>
+  <%= render_component(scope, comp, components, index) if comp -%>
+<% end -%>
