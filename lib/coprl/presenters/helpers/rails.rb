@@ -38,6 +38,33 @@ if defined?(Rails)
           end
 
           alias presenter_url presenters_url
+
+          def method_missing(name, *args)
+            # delegating to `::Rails.application` ensures the `#image_url` and
+            # `#image_path` view helper methods have access to
+            # `Rails::application.config`, allowing them access to properties
+            # they use (e.g. `config.action_controller.asset_host`).
+            delegates = [
+              ::Rails.application,
+              Coprl::Presenters::Helpers::Rails::UrlHelper.instance
+            ].freeze
+
+            target = nil
+            result = nil
+
+            delegates.each do |delegate|
+              if delegate.respond_to?(name)
+                ::Rails.logger.warn { "match: delegate #{name} to #{delegate}" }
+                target = delegate
+                result = delegate.send(name, *args)
+                break
+              end
+            end
+
+            return result if target
+
+            super
+          end
         end
       end
     end
