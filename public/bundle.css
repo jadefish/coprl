@@ -14868,24 +14868,24 @@ button.mdc-chip {
 .v-image--fit-fit {
   object-fit: scale-down; }
 
+.v-icon--positioned {
+  position: absolute;
+  z-index: 1; }
+
 .v-icon-position-left {
-  float: left;
-  padding-right: 16px; }
+  left: var(--v-padding1); }
 
 .v-icon-position-top {
-  top: 0; }
+  top: var(--v-padding1); }
 
 .v-icon-position-right {
-  float: right;
-  padding-left: 16px;
-  right: 8px; }
+  right: var(--v-padding1); }
 
 .v-icon-position-bottom {
-  position: absolute;
-  bottom: 8px; }
+  bottom: var(--v-padding1); }
 
 .v-icon-position-center {
-  line-height: 4; }
+  top: calc(50% - 1em/2); }
 
 .v-icon__fa {
   font-size: 24px; }
@@ -17427,11 +17427,13 @@ i:focus.v-datetime--clear {
 
 .v-error-message {
   color: #d50000;
-  padding: 20px;
+  background: #ffd5d5;
+  padding: var(--v-padding2);
   border: 1px solid #d50000;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-bottom: 5px; }
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  word-wrap: break-word; }
 
 .v-hidden {
   display: none !important; }
